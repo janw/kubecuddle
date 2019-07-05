@@ -51,6 +51,8 @@ RUN \
         grep browser_download | grep linux | cut -d '"' -f 4 | xargs wget -nv -O /usr/local/bin/stern && \
     chmod +x /usr/local/bin/stern
 
+COPY scripts /scripts
+
 RUN rm -rf /tmp/*
 WORKDIR /home/cuddle
 RUN \
