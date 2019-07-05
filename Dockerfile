@@ -51,8 +51,6 @@ RUN \
         grep browser_download | grep linux | cut -d '"' -f 4 | xargs wget -nv -O /usr/local/bin/stern && \
     chmod +x /usr/local/bin/stern
 
-COPY scripts /scripts
-
 RUN rm -rf /tmp/*
 WORKDIR /home/cuddle
 RUN \
@@ -61,6 +59,7 @@ RUN \
     usermod -aG sudo cuddle && \
     echo "cuddle ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
+COPY scripts/ /scripts
 COPY rc-files/ ./
 RUN chown -R cuddle:cuddle /home/cuddle
 USER cuddle
