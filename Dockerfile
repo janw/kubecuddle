@@ -28,6 +28,11 @@ RUN \
     && apt-get autoclean \
     && rm -rf /var/lib/apt/lists/*
 
+ENV TINI_VERSION v0.18.0
+RUN \
+    wget -O /usr/local/bin/tini "https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini" && \
+    chmod +x /usr/local/bin/tini
+
 RUN \
     # Kustomize
     curl -s https://api.github.com/repos/kubernetes-sigs/kustomize/releases/latest |\
