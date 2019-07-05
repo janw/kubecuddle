@@ -63,7 +63,8 @@ COPY scripts/ /scripts
 COPY rc-files/ ./
 RUN chown -R cuddle:cuddle /home/cuddle
 USER cuddle
-RUN \
-    zsh -c "source ~/.zshrc"
+
+ENV HOST=cuddle
+RUN zsh -c "source ~/.zshrc"
 
 ENTRYPOINT [ "zsh" ]
