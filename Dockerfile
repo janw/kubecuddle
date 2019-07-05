@@ -28,27 +28,27 @@ RUN \
     && apt-get autoclean \
     && rm -rf /var/lib/apt/lists/*
 
-ENV TINI_VERSION v0.18.0
 RUN \
-    wget -O /usr/local/bin/tini "https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini" && \
-    chmod +x /usr/local/bin/tini
-
-RUN \
+    # Tini
+    curl -s https://api.github.com/repos/krallin/tini/releases/latest |\
+        grep browser_download | grep 'tini\"' | cut -d '"' -f 4 | xargs wget -nv -O /usr/local/bin/tini && \
+    chmod +x /usr/local/bin/tini && \
     # Kustomize
     curl -s https://api.github.com/repos/kubernetes-sigs/kustomize/releases/latest |\
-        grep browser_download | grep linux | cut -d '"' -f 4 | xargs curl -O -L && \
-    mv kustomize_*_linux_amd64 /usr/local/bin/kustomize && \
+        grep browser_download | grep linux | cut -d '"' -f 4 | xargs wget -nv -O /usr/local/bin/kustomize && \
     chmod +x /usr/local/bin/kustomize && \
     \
     # Helm
-    curl -L https://get.helm.sh/helm-v2.14.1-linux-amd64.tar.gz | tar -zx && \
+    curl -s https://api.github.com/repos/helm/helm/releases/latest |\
+        sed -nE 's/.*(https:\/\/get\.helm\.sh\/helm-.+-linux-amd64.tar.gz).*/\1/p' | head -1 |\
+        xargs wget -nv -O /tmp/helm.tar.gz && \
+    tar -zxf /tmp/helm.tar.gz && \
     mv /tmp/linux-amd64/helm /usr/local/bin/helm && \
     chmod +x /usr/local/bin/helm && \
     \
     # Stern
     curl -s https://api.github.com/repos/wercker/stern/releases/latest |\
-        grep browser_download | grep linux | cut -d '"' -f 4 | xargs curl -O -L && \
-    mv stern_linux_amd64 /usr/local/bin/stern && \
+        grep browser_download | grep linux | cut -d '"' -f 4 | xargs wget -nv -O /usr/local/bin/stern && \
     chmod +x /usr/local/bin/stern
 
 RUN rm -rf /tmp/*
