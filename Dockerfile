@@ -19,7 +19,7 @@ RUN \
     DEBIAN_FRONTEND=noninteractive \
     apt-get install -y \
     # Basic shell tooling
-    wget curl screen git zsh bash vim-tiny sudo zgen \
+    wget curl screen git zsh bash vim-nox sudo zgen \
     # Kubernetes tools
     kubectl \
     # Miscellaneous tools
