@@ -13,8 +13,6 @@ RUN apt-get update && \
         apt-get install -y \
             # Basic shell tooling
             wget curl screen git zsh bash vim-nox zgen \
-            # Shellinabox for web terminal sessions
-            shellinabox \
             # Kubernetes tools
             kubectl \
             # Miscellaneous tools
@@ -38,7 +36,13 @@ RUN apt-get update && \
     # Stern
     curl -s https://api.github.com/repos/wercker/stern/releases/latest |\
         grep browser_download | grep linux | cut -d '"' -f 4 | xargs wget -nv -O /usr/local/bin/stern && \
-    chmod +x /usr/local/bin/stern
+    chmod +x /usr/local/bin/stern && \
+    # Gotty
+    curl -s https://api.github.com/repos/yudai/gotty/releases/latest |\
+        grep browser_download | grep linux_amd64 | cut -d '"' -f 4 | xargs wget -nv -O /tmp/gotty.tar.gz && \
+    tar -zxf /tmp/gotty.tar.gz && \
+    mv /tmp/gotty /usr/local/bin/gotty && \
+    chmod +x /usr/local/bin/gotty
 
 ARG GID=1042
 ARG UID=1042

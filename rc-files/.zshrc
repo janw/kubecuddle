@@ -23,12 +23,15 @@ export SAVEHIST=1000
 
 # Theme of choice: https://github.com/denysdovhan/spaceship-prompt
 SPACESHIP_PROMPT_ORDER=(
-  user          # Username section
   dir           # Current directory section
-  host          # Hostname section
   git           # Git section (git_branch + git_status)
   kubecontext   # Kubectl context section
   char          # Prompt character
 )
 SPACESHIP_DIR_TRUNC_PREFIX="…/"
 SPACESHIP_PROMPT_DEFAULT_PREFIX=""
+SPACESHIP_CHAR_SYMBOL="❯ "
+SPACESHIP_KUBECONTEXT_COLOR=magenta
+SPACESHIP_CHAR_COLOR_SUCCESS=magenta
+SPACESHIP_CHAR_COLOR_FAILURE=red
+SPACESHIP_DIR_COLOR=silver
