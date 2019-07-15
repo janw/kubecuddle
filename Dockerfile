@@ -76,5 +76,5 @@ USER $USERNAME
 ENV HOST=$USERNAME
 RUN zsh -c "source ~/.zshrc"
 
-ENTRYPOINT [ "tini", "--" ]
+ENTRYPOINT [ "tini", "--", "/scripts/entrypoint.sh" ]
 CMD [ "zsh" ]
