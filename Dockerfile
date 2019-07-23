@@ -69,7 +69,8 @@ RUN \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /tmp/* && \
     # Ensure home ownership
-    chown -R $USERNAME:$GROUPNAME /home/$USERNAME
+    chown -R $USERNAME:$GROUPNAME /home/$USERNAME && \
+    chmod +x /scripts/*
 
 # Drop privileges and make ourselves at home.
 USER $USERNAME
